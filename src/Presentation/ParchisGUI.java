@@ -22,6 +22,7 @@ public class ParchisGUI extends JFrame {
         prepareComponents();
     }
 
+    //a
     private void prepareFrame(){
         this.setTitle("PoobChis");
         this.setSize(1200, 700);
