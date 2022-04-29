@@ -24,6 +24,7 @@ public class ParchisGUI extends JFrame {
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 

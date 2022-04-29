@@ -8,9 +8,8 @@ public class GameSection extends JPanel {
     PlayerPanel playerPanel;
 
     public GameSection(){
-        gamePanel = new GamePanel();
-        playerPanel = new PlayerPanel();
         preparePanel();
+        initComponents();
         prepareComponents();
     }
 
@@ -18,7 +17,13 @@ public class GameSection extends JPanel {
         setLayout(new BorderLayout());
     }
 
+    private void initComponents(){
+        gamePanel = new GamePanel();
+        playerPanel = new PlayerPanel();
+    }
+
     private void prepareComponents(){
+        this.setBackground(Color.RED);
         this.add(playerPanel, BorderLayout.EAST);
         this.add(gamePanel, BorderLayout.WEST);
     }
