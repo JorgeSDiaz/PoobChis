@@ -1,9 +1,12 @@
 package Presentation;
 
+import Domain.Parchis;
+
 import javax.swing.*;
 
 public class ParchisGUI extends JFrame {
-    GameSection gameSection;
+    private Parchis parchis;
+    private GameSection gameSection;
 
     public ParchisGUI(){
         initElements();
@@ -11,7 +14,8 @@ public class ParchisGUI extends JFrame {
     }
 
     private void initElements(){
-        gameSection = new GameSection();
+        parchis = new Parchis();
+        gameSection = new GameSection(parchis);
     }
 
     private void prepareElements(){
@@ -21,7 +25,7 @@ public class ParchisGUI extends JFrame {
 
     private void prepareFrame(){
         this.setTitle("PoobChis");
-        this.setSize(1200, 700);
+        this.setSize(1100, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);

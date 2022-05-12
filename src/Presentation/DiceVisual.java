@@ -4,23 +4,17 @@ import Domain.Dice;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
 public class DiceVisual extends JPanel {
     private Color BACKGROUND_COLOR = Color.white;
     private Color ORNAMENTS_COLOR = Color.black;
-    private int xCor;
-    private int yCor;
-    private Dice dice;
+    private int xCor, yCor;
+    private byte value;
 
-    public DiceVisual(int xCor, int yCor){
+    public DiceVisual(int xCor, int yCor, int value){
         this.xCor = xCor;
         this.yCor = yCor;
-        dice = new Dice();
-    }
-
-    public void roll(){
-        dice.roll();
+        this.value = (byte) value;
     }
 
     @Override
@@ -29,10 +23,14 @@ public class DiceVisual extends JPanel {
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setColor(BACKGROUND_COLOR);
         graphics2D.fillRect(xCor, yCor, 125, 126);
-        drawPoints(graphics2D, dice.getValue());
+        drawPoints(graphics2D, this.value);
 
         setSize(125, 126);
         setLocation(xCor + 2, yCor + 1);
+    }
+
+    public void roll(byte newValue){
+        this.value = newValue;
     }
 
     private void drawPoints(Graphics2D g2d, byte value){

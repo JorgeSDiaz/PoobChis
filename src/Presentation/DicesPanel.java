@@ -6,15 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DicesPanel extends JPanel {
+    private Dice[] dices;
     private DiceVisual[] diceVisual;
 
-    public DicesPanel(){
+    public DicesPanel(Dice[] dices){
+        this.dices = dices;
         initElements();
         prepareElements();
     }
 
     private void initElements(){
-        diceVisual = new DiceVisual[]{new DiceVisual(1, 1), new DiceVisual(130, 1)};
+        diceVisual = new DiceVisual[]{new DiceVisual(1, 1, dices[0].getValue()),
+                new DiceVisual(130, 1, dices[1].getValue())};
     }
 
     private void prepareElements(){
@@ -23,8 +26,10 @@ public class DicesPanel extends JPanel {
     }
 
     public void actionRoll(){
-        diceVisual[0].roll();
-        diceVisual[1].roll();
+        dices[0].roll();
+        dices[1].roll();
+        diceVisual[0].roll(dices[0].getValue());
+        diceVisual[1].roll(dices[1].getValue());
         refresh();
     }
 
@@ -38,6 +43,6 @@ public class DicesPanel extends JPanel {
         super.paintComponent(g);
         setBackground(Color.black);
         setSize(260, 130);
-        setLocation(105, 20);
+        setLocation(70, 20);
     }
 }

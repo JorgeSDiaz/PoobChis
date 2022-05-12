@@ -1,13 +1,17 @@
 package Presentation;
 
+import Domain.Parchis;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GameSection extends JPanel {
-    GamePanel gamePanel;
-    PlayerPanel playerPanel;
+    private Parchis parchis;
+    private GamePanel gamePanel;
+    private PlayerPanel playerPanel;
 
-    public GameSection(){
+    public GameSection(Parchis parchis){
+        this.parchis = parchis;
         preparePanel();
         initComponents();
         prepareComponents();
@@ -19,7 +23,7 @@ public class GameSection extends JPanel {
 
     private void initComponents(){
         gamePanel = new GamePanel();
-        playerPanel = new PlayerPanel();
+        playerPanel = new PlayerPanel(parchis.getDices());
     }
 
     private void prepareComponents(){

@@ -1,22 +1,26 @@
 package Presentation;
 
+import Domain.Dice;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayerPanel extends JPanel {
-    DicesPanel dicesPanel;
-    JButton rolldice;
+    private Dice[] dices;
+    private DicesPanel dicesPanel;
+    private JButton rolldice;
 
-    public PlayerPanel(){
+    public PlayerPanel(Dice[] dices){
+        this.dices = dices;
         initComponents();
         prepareComponents();
         prepareActions();
     }
 
     private void initComponents(){
-        dicesPanel = new DicesPanel();
+        dicesPanel = new DicesPanel(dices);
         rolldice = new JButton("Roll Dices");
     }
 
@@ -43,7 +47,7 @@ public class PlayerPanel extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         setSize(470, 700);
-        setLocation(730, 0);
+        setLocation(700, 0);
         setBackground(Color.DARK_GRAY);
     }
 }
