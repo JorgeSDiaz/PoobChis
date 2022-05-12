@@ -12,4 +12,8 @@ public class Parchis {
     public Dice[] getDices(){
         return dices;
     }
+
+    public Board getBoard(){
+        return board;
+    }
 }

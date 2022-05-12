@@ -22,7 +22,7 @@ public class GameSection extends JPanel {
     }
 
     private void initComponents(){
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(parchis.getBoard());
         playerPanel = new PlayerPanel(parchis.getDices());
     }
 

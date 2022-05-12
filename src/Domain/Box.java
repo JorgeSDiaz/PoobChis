@@ -10,8 +10,8 @@ public class Box {
     public Box(int width, int height, int xCoordinate, int yCoordinate, Color color){
         this.width = width;
         this.height = height;
-        this.xCoordinate = xCoordinate  == -1 ? null : xCoordinate;
-        this.yCoordinate = yCoordinate == -1 ? null : yCoordinate;
+        this.xCoordinate = xCoordinate  == -1 ? 0 : xCoordinate;
+        this.yCoordinate = yCoordinate == -1 ? 0 : yCoordinate;
         this.color = color == null ? Color.black : color;
     }
 
@@ -31,6 +31,14 @@ public class Box {
 
     public int getYCoordinate(){
         return this.yCoordinate;
+    }
+
+    public int[] getXCoordinates(){
+        return xCoordinates;
+    }
+
+    public int[] getYCoordinates(){
+        return yCoordinates;
     }
 
     public int getWidth(){

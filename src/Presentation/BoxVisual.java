@@ -8,7 +8,7 @@ import java.awt.*;
 public class BoxVisual extends JPanel {
     private Box[] boxes;
 
-    public BoxVisual(Box[] boxes){
+    public BoxVisual(Box box){
         this.boxes = boxes;
     }
 
