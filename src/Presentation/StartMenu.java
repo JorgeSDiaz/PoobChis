@@ -14,6 +14,9 @@ public class StartMenu extends JFrame {
     private JPanel container;
     private ParchisGUI interfaz;
 
+    private PlayerInfoScreen playerInfoScreen_p1;
+    private PlayerInfoScreen playerInfoScreen_p2;
+
 
     /**
      * Builder of the start menu that prepares the elements and the actions
@@ -70,13 +73,11 @@ public class StartMenu extends JFrame {
         onePlayer.addActionListener((new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                interfaz = new ParchisGUI();
-                interfaz.setVisible(false);
-                String name1 = JOptionPane.showInputDialog(null, "Enter your name: ");
                 String[] buttons = {"Beginner", "Expert" };
                 int optionReturns = JOptionPane.showOptionDialog(null, "Difficulty level",
                         "Choose an option", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon, buttons, "default");
-                interfaz.setVisible(true);
+                playerInfoScreen_p1 = new PlayerInfoScreen();
+                playerInfoScreen_p1.setVisible(true);
                 setVisible(false);
             }
         }));
@@ -84,13 +85,15 @@ public class StartMenu extends JFrame {
         twoPlayers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                interfaz = new ParchisGUI();
-                interfaz.setVisible(false);
+                String[] buttons = {"Player 1", "Player2" };
+                int optionReturns = JOptionPane.showOptionDialog(null, "Two Players",
+                        "Choose an option", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon, buttons, "default");
                 //first player
-                String name1 = JOptionPane.showInputDialog(null, "Enter the name of player 1: ");
+                playerInfoScreen_p1 = new PlayerInfoScreen();
+                playerInfoScreen_p1.setVisible(true);
                 //second player
-                String name2 = JOptionPane.showInputDialog(null, "Enter the name of player 2: ");
-                interfaz.setVisible(true);
+                playerInfoScreen_p2 = new PlayerInfoScreen();
+                playerInfoScreen_p2.setVisible(true);
                 setVisible(false);
             }
         });
