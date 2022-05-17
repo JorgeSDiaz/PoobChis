@@ -15,7 +15,7 @@ public class StartMenu extends JFrame {
     private ParchisGUI interfaz;
 
     private PlayerInfoScreen playerInfoScreen_p1;
-    private PlayerInfoScreen playerInfoScreen_p2;
+    private TwoPlayersInfoScreen playerInfoScreen_p2;
 
 
     /**
@@ -85,17 +85,11 @@ public class StartMenu extends JFrame {
         twoPlayers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] buttons = {"Player 1", "Player2" };
-                int optionReturns = JOptionPane.showOptionDialog(null, "Two Players",
-                        "Choose an option", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon, buttons, "default");
-                //first player
-                playerInfoScreen_p1 = new PlayerInfoScreen();
-                playerInfoScreen_p1.setVisible(true);
-                //second player
-                playerInfoScreen_p2 = new PlayerInfoScreen();
+                playerInfoScreen_p2 = new TwoPlayersInfoScreen();
                 playerInfoScreen_p2.setVisible(true);
                 setVisible(false);
             }
         });
     }
 }
+

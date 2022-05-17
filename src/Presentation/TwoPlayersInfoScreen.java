@@ -1,5 +1,4 @@
 package Presentation;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -8,18 +7,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlayerInfoScreen extends JFrame {
+public class TwoPlayersInfoScreen extends JFrame {
     private ImageIcon icon;
     private JButton next, tokensinfo;
     private JPanel containerTokens, containerButtons, containerName, container;
     private JTextField name;
     private JLabel nameText;
-    private WildcardsScreen wildcardsScreen;
+    private PlayerInfoScreen secondPlayer;
     private JToggleButton normal, rocket, vacuum, jumping, advantageous, engineer, random;
     /**
      * Builder of the player screen that prepares the elements and the actions
      */
-    public PlayerInfoScreen() {
+    public TwoPlayersInfoScreen() {
         prepareElements();
         prepareActions();
     }
@@ -69,7 +68,7 @@ public class PlayerInfoScreen extends JFrame {
     }
 
     /**
-     * Prepare the buttons(play and tokens info)
+     * Prepare the buttons(next and tokens info)
      */
     private void prepareButtons() {
         containerButtons = new JPanel();
@@ -99,17 +98,18 @@ public class PlayerInfoScreen extends JFrame {
         container.add(containerName, BorderLayout.NORTH);
     }
     /**
-     * Prepare player info screen actions
+     * Prepare two players info screen actions
      */
     private void prepareActions() {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                wildcardsScreen = new WildcardsScreen();
-                wildcardsScreen.setVisible(true);
+                secondPlayer = new PlayerInfoScreen();
+                secondPlayer.setVisible(true);
                 setVisible(false);
             }
         });
+
         tokensinfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
