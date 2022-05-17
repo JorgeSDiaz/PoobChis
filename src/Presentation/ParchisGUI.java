@@ -5,7 +5,6 @@ import Domain.Parchis;
 import javax.swing.*;
 
 public class ParchisGUI extends JFrame {
-    private Parchis parchis;
     private GameSection gameSection;
 
     public ParchisGUI(){
@@ -14,8 +13,7 @@ public class ParchisGUI extends JFrame {
     }
 
     private void initElements(){
-        parchis = new Parchis();
-        gameSection = new GameSection(parchis);
+        gameSection = new GameSection();
     }
 
     private void prepareElements(){
@@ -25,9 +23,8 @@ public class ParchisGUI extends JFrame {
 
     private void prepareFrame(){
         this.setTitle("PoobChis");
-        this.setSize(1100, 730);
+        this.setSize(1100, 760);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -37,7 +34,9 @@ public class ParchisGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        StartMenu startMenu = new StartMenu();
-        startMenu.setVisible(true);
+        //StartMenu startMenu = new StartMenu();
+        //startMenu.setVisible(true);
+        ParchisGUI parchisGUI = new ParchisGUI();
+        parchisGUI.setVisible(true);
     }
 }

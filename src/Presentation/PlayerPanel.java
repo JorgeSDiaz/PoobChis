@@ -1,46 +1,34 @@
 package Presentation;
 
-import Domain.Dice;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PlayerPanel extends JPanel {
-    private Dice[] dices;
+    private byte diceValueOne, diceValueTwo;
     private DicesPanel dicesPanel;
-    private JButton rolldice;
 
-    public PlayerPanel(Dice[] dices){
-        this.dices = dices;
+    public PlayerPanel(byte valueOne, byte valueTwo){
+        this.diceValueOne = valueOne;
+        this.diceValueTwo = valueTwo;
         initComponents();
         prepareComponents();
-        prepareActions();
     }
 
     private void initComponents(){
-        dicesPanel = new DicesPanel(dices);
-        rolldice = new JButton("Roll Dices");
+        dicesPanel = new DicesPanel(diceValueOne, diceValueTwo);
     }
 
     private void prepareComponents(){
         preparePanel();
         this.add(dicesPanel, BorderLayout.NORTH);
-        this.add(rolldice, BorderLayout.SOUTH);
     }
 
     private void preparePanel(){
         setLayout(new BorderLayout());
     }
 
-    private void prepareActions(){
-        rolldice.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dicesPanel.actionRoll();
-            }
-        });
+    public void actionRoll(byte newValueOne, byte newValueTwo){
+        dicesPanel.actionRoll(newValueOne, newValueTwo);
     }
 
     @Override

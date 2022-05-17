@@ -6,18 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DicesPanel extends JPanel {
-    private Dice[] dices;
+    private byte diceValueOne, diceValueTwo;
     private DiceVisual[] diceVisual;
 
-    public DicesPanel(Dice[] dices){
-        this.dices = dices;
+    public DicesPanel(byte valueOne, byte valueTwo){
+        this.diceValueOne = valueOne;
+        this.diceValueTwo = valueTwo;
         initElements();
         prepareElements();
     }
 
     private void initElements(){
-        diceVisual = new DiceVisual[]{new DiceVisual(1, 1, dices[0].getValue()),
-                new DiceVisual(130, 1, dices[1].getValue())};
+        diceVisual = new DiceVisual[]{new DiceVisual(1, 1, diceValueOne),
+                new DiceVisual(130, 1, diceValueTwo)};
     }
 
     private void prepareElements(){
@@ -25,12 +26,10 @@ public class DicesPanel extends JPanel {
         this.add(diceVisual[1]);
     }
 
-    public void actionRoll(){
-        dices[0].roll();
-        dices[1].roll();
-        diceVisual[0].roll(dices[0].getValue());
-        diceVisual[1].roll(dices[1].getValue());
-        refresh();
+    public void actionRoll(byte newValueOne, byte newValueTwo){
+        diceVisual[0].roll(newValueOne);
+        diceVisual[1].roll(newValueTwo);
+        this.refresh();
     }
 
     private void refresh(){

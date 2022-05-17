@@ -25,4 +25,6 @@ public class Dice {
     public byte getValue(){
         return value;
     }
+
+    public byte setValue(byte newValue){return value;}
 }
