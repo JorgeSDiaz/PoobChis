@@ -7,20 +7,24 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PlayerInfoScreen extends JFrame {
     private ImageIcon icon;
-    protected JButton next, tokensinfo;
+    private JButton next, tokensinfo;
     private JPanel containerTokens, containerButtons, containerName, container;
     private JTextField name;
     private JLabel nameText;
-    protected WildcardsScreen wildcardsScreen;
-    protected InfoPlayer2 secondPlayer;
+    private WildcardsScreen wildcardsScreen;
     private JToggleButton normal, rocket, vacuum, jumping, advantageous, engineer, random;
+    ArrayList<String> tokensSelected = new ArrayList<String>();
+    private int numberPlayers;
+
     /**
      * Builder of the player screen that prepares the elements and the actions
      */
-    public PlayerInfoScreen() {
+    public PlayerInfoScreen(int n) {
+        numberPlayers = n;
         prepareElements();
         prepareActions();
     }
@@ -70,7 +74,7 @@ public class PlayerInfoScreen extends JFrame {
     }
 
     /**
-     * Prepare the buttons(play and tokens info)
+     * Prepare the buttons(next and tokens info) in the south
      */
     private void prepareButtons() {
         containerButtons = new JPanel();
@@ -99,10 +103,43 @@ public class PlayerInfoScreen extends JFrame {
         containerName.add(name);
         container.add(containerName, BorderLayout.NORTH);
     }
+
     /**
      * Prepare player info screen actions
      */
     private void prepareActions() {
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(numberPlayers == 1) {
+                    if (name.getText().equals("") || (tokensSelected.size() == 1  && !(tokensSelected.contains(random.getName())))
+                            || tokensSelected.size() > 1 && tokensSelected.size() < 4) {
+                        JOptionPane.showMessageDialog(null, "Please choose your tokens or enter your name");
+                    } else {
+                        getInfoP1();
+                        wildcardsScreen = new WildcardsScreen();
+                        wildcardsScreen.setVisible(true);
+                        setVisible(false);
+                    }
+                } else if (numberPlayers == 2) {
+                    if (name.getText().equals("") || (tokensSelected.size() == 1  && !(tokensSelected.contains(random.getName())))
+                            || tokensSelected.size() > 1 && tokensSelected.size() < 4) {
+                        JOptionPane.showMessageDialog(null, "Please choose your tokens or enter your name");
+                    } else {
+                        getInfoP2();
+                        tokensSelected.clear();
+                        next.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                PlayerInfoScreen playerInfoScreen = new PlayerInfoScreen(1);
+                                playerInfoScreen.setVisible(true);
+                                setVisible(false);
+                            }
+                        });
+                    }
+                }
+            }
+        });
         tokensinfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,5 +159,105 @@ public class PlayerInfoScreen extends JFrame {
 
             }
         });
+        random.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JToggleButton[] tokens = new JToggleButton[6];
+                tokens[0] = normal;
+                tokens[1] = rocket;
+                tokens[2] = vacuum;
+                tokens[3] = jumping;
+                tokens[4] = advantageous;
+                tokens[5] = engineer;
+                if(random.isSelected()){
+                    for(int i = 0; i <= 5; i++){
+                        tokens[i].setSelected(false);
+                    }
+                    tokensSelected.clear();
+                    tokensSelected.add(random.getName());
+                } else{tokensSelected.remove(random.getName());}
+            }
+        });
+        normal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(normal);
+            }
+        });
+        rocket.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(rocket);
+            }
+        });
+        vacuum.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(vacuum);
+            }
+        });
+        jumping.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(jumping);
+            }
+        });
+        advantageous.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(advantageous);
+            }
+        });
+        engineer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TokensSelected(engineer);
+            }
+        });
+
+    }
+
+    /**
+     * Obtains in an arraylist the name and tokens entered by the player 2
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public ArrayList getInfoP2(){
+        ArrayList<String> InfoPlayer2 = new ArrayList<String>();
+        InfoPlayer2.add(name.getText());
+        InfoPlayer2.add(String.valueOf(tokensSelected));
+        return(InfoPlayer2);
+    }
+
+    /**
+     * Obtains in an arraylist the name and tokens entered by the player single o player 1
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public ArrayList getInfoP1(){
+        ArrayList<String> InfoPlayer1 = new ArrayList<String>();
+        InfoPlayer1.add(name.getText());
+        InfoPlayer1.add(String.valueOf(tokensSelected));
+        return(InfoPlayer1);
+    }
+
+    /**
+     * Verifies that the selected Tokens are 4 (or 1 in case of selecting random), sends an error message in case of trying to choose more
+     * @param token= jtogglebutton selected (except random)
+     */
+    private void TokensSelected(JToggleButton token) {
+        if (random.isSelected()) {
+            token.setSelected(false);
+        }
+        else if (token.isSelected()) {
+            if (tokensSelected.size() <= 3) {
+                tokensSelected.add(token.getName());
+            } else {
+                if (token.isSelected() == false) {
+                    tokensSelected.remove(token.getName());
+                } else {
+                    token.setSelected(false);
+                    JOptionPane.showMessageDialog(null, "Just pick 4 tokens >:(");
+                }
+            }
+        } else if (token.isSelected() == false) { tokensSelected.remove(token.getName()); }
     }
 }

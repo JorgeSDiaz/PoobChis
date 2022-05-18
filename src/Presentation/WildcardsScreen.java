@@ -7,6 +7,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class WildcardsScreen extends JFrame {
     private ImageIcon icon;
@@ -15,6 +16,7 @@ public class WildcardsScreen extends JFrame {
     JToggleButton moveAlong, back, goToJail, getOutOfJail, playDouble, removeToken, breakBlocking, immortal, mutate;
     JButton play, wildcardsInfo;
     ParchisGUI interfaz;
+    ArrayList<String> wildcardsSelected = new ArrayList<String>();
 
     public WildcardsScreen(){
         prepareElements();
@@ -33,6 +35,10 @@ public class WildcardsScreen extends JFrame {
         prepareWildcards();
         prepareButtons();
     }
+
+    /**
+     * Prepare the center with the wild cards game
+     */
     private void prepareWildcards() {
         containerWildcards = new JPanel();
         containerWildcards.setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5), new TitledBorder("Choose your wildcards to game (4 wildcards)")));
@@ -57,6 +63,10 @@ public class WildcardsScreen extends JFrame {
         containerWildcards.add(mutate);
         container.add(containerWildcards, BorderLayout.CENTER);
     }
+
+    /**
+     * Prepare the buttons(play and wildcards info) in the south
+     */
     private void prepareButtons(){
         containerButtons = new JPanel();
         play = new JButton("Play ☺");
@@ -67,6 +77,9 @@ public class WildcardsScreen extends JFrame {
         container.add(containerButtons, BorderLayout.SOUTH);
     }
 
+    /**
+     * prepare the header with the title "wildcards POOBchis"
+     */
     private void prepareName() {
         container = new JPanel();
         add(container);
@@ -78,15 +91,88 @@ public class WildcardsScreen extends JFrame {
         containerName.add(nameText);
         container.add(containerName, BorderLayout.NORTH);
     }
+
+    /**
+     * Prepare wild cards screen actions
+     */
     private void prepareActions(){
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                interfaz = new ParchisGUI();
-                interfaz.setVisible(true);
-                setVisible(false);
+                if (wildcardsSelected.size() == 0||wildcardsSelected.size() > 0 && wildcardsSelected.size() < 4) {
+                    JOptionPane.showMessageDialog(null, "Please choose your wild cards");
+                } else {
+                    getWildcards();
+                    interfaz = new ParchisGUI();
+                    interfaz.setVisible(true);
+                    setVisible(false);
+                }
             }
         });
+
+        moveAlong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(moveAlong);
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(back);
+            }
+        });
+
+        goToJail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(goToJail);
+            }
+        });
+
+        getOutOfJail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(getOutOfJail);
+            }
+        });
+
+        playDouble.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(playDouble);
+            }
+        });
+
+        removeToken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(removeToken);
+            }
+        });
+
+        breakBlocking.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(breakBlocking);
+            }
+        });
+
+        immortal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(immortal);
+            }
+        });
+
+        mutate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WildcardsSelected(mutate);
+            }
+        });
+
         wildcardsInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,5 +194,31 @@ public class WildcardsScreen extends JFrame {
 
             }
         });
+    }
+
+    /**
+     * Verifies that the selected wildcards are 4, sends an error message in case of trying to choose more
+     * @param wildcard jtogglebutton selected
+     */
+    private void WildcardsSelected(JToggleButton wildcard) {
+        if(wildcard.isSelected()) {
+            if(wildcardsSelected.size() <= 3){
+                wildcardsSelected.add(wildcard.getText());
+            } else {
+                if(wildcard.isSelected() == false){
+                    wildcardsSelected.remove(wildcard.getText());
+                }else {
+                    wildcard.setSelected(false);
+                    JOptionPane.showMessageDialog(null, "Just pick 4 wild cards >:(");
+                }
+            }
+        } else{ wildcardsSelected.remove(wildcard.getText());}
+    }
+
+    /**
+     * Obtains in an arraylist the wildcards entered by the player/players
+     */
+    public ArrayList getWildcards(){
+        return(wildcardsSelected);
     }
 }
