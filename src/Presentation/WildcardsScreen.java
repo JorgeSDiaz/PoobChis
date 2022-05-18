@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WildcardsScreen extends JFrame {
+    private ImageIcon icon;
     JPanel container, containerWildcards, containerButtons, containerName;
     JLabel nameText;
     JToggleButton moveAlong, back, goToJail, getOutOfJail, playDouble, removeToken, breakBlocking, immortal, mutate;
@@ -84,6 +85,27 @@ public class WildcardsScreen extends JFrame {
                 interfaz = new ParchisGUI();
                 interfaz.setVisible(true);
                 setVisible(false);
+            }
+        });
+        wildcardsInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        "⠀♡⠀Move along:⠀The token that has this wild card advances 5 spaces automatically. \n " +
+                                "\n⠀♡⠀Back:⠀The token that has this wild card moves back 5 spaces automatically.\n" +
+                                "\n⠀♡⠀Go to jail:⠀The tile that has this joker will go directly to jail.\n" +
+                                "\n⠀♡⠀Get out of jail:⠀The team of the color corresponding to the token that \n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀acquires this wild card, will be able to release one of its pieces \n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀(only if it has pieces in jail).\n"+
+                                "\n⠀♡⠀Play double:⠀The player who owns the token to which this wild card appears will\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀have an additional turn, that is, he will be able to play the dice again.\n"+
+                                "\n⠀♡⠀Remove token:⠀Your opponent's most advanced token is sent to jail.\n"+
+                                "\n⠀♡⠀Break lock:⠀If there are blockades on the board, the blockade closest to the\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀space where the wild card was obtained is broken.\n"+
+                                "\n⠀♡⠀Immortal:⠀If this wild card is obtained, no one can kill the tile that obtained it.\n"+
+                                "\n⠀♡⠀Mutate:⠀The token changes type, becoming one randomly selected from those that\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀the player in turn does not have.","wildcards info " , JOptionPane.DEFAULT_OPTION, icon);
+
             }
         });
     }
