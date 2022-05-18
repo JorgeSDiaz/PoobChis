@@ -10,11 +10,12 @@ import java.awt.event.ActionListener;
 
 public class PlayerInfoScreen extends JFrame {
     private ImageIcon icon;
-    private JButton next, tokensinfo;
+    protected JButton next, tokensinfo;
     private JPanel containerTokens, containerButtons, containerName, container;
     private JTextField name;
     private JLabel nameText;
-    private WildcardsScreen wildcardsScreen;
+    protected WildcardsScreen wildcardsScreen;
+    protected InfoPlayer2 secondPlayer;
     private JToggleButton normal, rocket, vacuum, jumping, advantageous, engineer, random;
     /**
      * Builder of the player screen that prepares the elements and the actions
@@ -27,7 +28,7 @@ public class PlayerInfoScreen extends JFrame {
     /**
      * Prepare the different elements of the player screen
      */
-    private void prepareElements() {
+    void prepareElements() {
         setTitle("Player info");
         setSize(632, 630);
         setResizable(false);
@@ -102,14 +103,6 @@ public class PlayerInfoScreen extends JFrame {
      * Prepare player info screen actions
      */
     private void prepareActions() {
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                wildcardsScreen = new WildcardsScreen();
-                wildcardsScreen.setVisible(true);
-                setVisible(false);
-            }
-        });
         tokensinfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
