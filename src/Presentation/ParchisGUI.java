@@ -34,9 +34,9 @@ public class ParchisGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        StartMenu startMenu = new StartMenu();
-        startMenu.setVisible(true);
-        //ParchisGUI parchisGUI = new ParchisGUI();
-        //parchisGUI.setVisible(true);
+        //StartMenu startMenu = new StartMenu();
+        //startMenu.setVisible(true);
+        ParchisGUI parchisGUI = new ParchisGUI();
+        parchisGUI.setVisible(true);
     }
 }

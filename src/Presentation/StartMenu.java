@@ -12,7 +12,6 @@ public class StartMenu extends JFrame {
     private JButton twoPlayers;
     private JButton onePlayer;
     private JPanel container;
-    private ParchisGUI interfaz;
 
     private InfoPlayer2 playerInfoScreen_p1;
     private InfoPlayer1 playerInfoScreen_p2;

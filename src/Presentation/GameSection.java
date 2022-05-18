@@ -27,7 +27,7 @@ public class GameSection extends JPanel {
 
     private void initComponents(){
         rolldice = new JButton("Roll Dice");
-        gamePanel = new GamePanel(parchis.getBoard());
+        gamePanel = new GamePanel(parchis);
         playerPanel = new PlayerPanel(parchis.getDices()[0].getValue(), parchis.getDices()[1].getValue());
     }
 
@@ -38,6 +38,9 @@ public class GameSection extends JPanel {
                 parchis.getDices()[0].roll();
                 parchis.getDices()[1].roll();
                 playerPanel.actionRoll(parchis.getDices()[0].getValue(), parchis.getDices()[1].getValue());
+                parchis.play();
+                gamePanel = new GamePanel(parchis);
+                gamePanel.repaint();
             }
         });
     }

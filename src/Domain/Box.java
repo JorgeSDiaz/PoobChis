@@ -3,11 +3,12 @@ package Domain;
 import java.awt.*;
 
 public class Box {
-    protected int width, height, xCoordinate, yCoordinate;
+    protected int cantToken, width, height, xCoordinate, yCoordinate;
     protected int[] xCoordinates, yCoordinates;
     protected Color color;
 
     public Box(int width, int height, int xCoordinate, int yCoordinate, Color color){
+        this.cantToken = 0;
         this.width = width;
         this.height = height;
         this.xCoordinate = xCoordinate  == -1 ? 0 : xCoordinate;
@@ -47,5 +48,17 @@ public class Box {
 
     public int getHeight(){
         return this.height;
+    }
+
+    public void plusCantToken(){
+        cantToken += 1;
+    }
+
+    public void minusCantToken(){
+        cantToken -= 1;
+    }
+
+    public int getCantToken(){
+        return cantToken;
     }
 }

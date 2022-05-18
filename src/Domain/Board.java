@@ -179,4 +179,8 @@ public class Board {
     public Box[] getBoxes(){
         return boxes;
     }
+
+    public Box getBox(int position){
+        return boxes[position];
+    }
 }
