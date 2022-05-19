@@ -3,6 +3,9 @@ package Domain;
 public class Dice {
     private byte value;
 
+    /**
+     * Dice constructor
+     */
     public Dice(){
         roll();
     }
@@ -19,12 +22,11 @@ public class Dice {
         }
     }
 
-    /*
-
+    /**
+     * returns dice value
+     * @return Dice value
      */
     public byte getValue(){
         return value;
     }
-
-    public byte setValue(byte newValue){return value;}
 }

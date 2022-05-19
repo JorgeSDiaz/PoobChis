@@ -9,10 +9,18 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     Box[] boxes;
 
+    /**
+     * game panel builder
+     * @param parchis Parchis on which we work
+     */
     public GamePanel(Parchis parchis){
         this.boxes = parchis.getBoard().getBoxes();
     }
 
+    /**
+     * draws the panel
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -22,11 +30,18 @@ public class GamePanel extends JPanel {
         paintTokens(g);
     }
 
-    public void refresh(Parchis parchis){
-        this.boxes = parchis.getBoard().getBoxes();
-        this.repaint();
+    /**
+     * define the boxes to be drawn
+     * @param newBoxes the boxes to be drawn
+     */
+    public void setBoxes(Box[] newBoxes){
+        this.boxes = newBoxes;
     }
 
+    /**
+     * method of drawing the board
+     * @param g the <code>Graphics</code> object to protect
+     */
     private void  paintBoard(Graphics g){
         Graphics2D graphics2D = (Graphics2D) g;
         for (Box b: boxes){
@@ -46,15 +61,20 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * method of drawing the cards of each home
+     * @param g the <code>Graphics</code> object to protect
+     */
     private void paintTokens(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < 4; i++){
             Home home = (Home) boxes[i];
             for (int j = 0; j < 4; j++){
-                g2d.setColor(home.getTokens()[j].getSecondColor());
-                g2d.fillOval(home.getCoordinatesTokens()[j][0], home.getCoordinatesTokens()[j][1], 25, 25);
+                Token token = home.getTokens()[j];
+                g2d.setColor(token.getSecondColor());
+                g2d.fillOval(token.getXCoordinate(), token.getYCoordinate(), 25, 25);
                 g2d.setColor(home.getColor());
-                g2d.fillRect(home.getCoordinatesTokens()[j][0] + 5, home.getCoordinatesTokens()[j][1] + 5, 15, 15);
+                g2d.fillRect(token.getXCoordinate() + 5, token.getYCoordinate() + 5, 15, 15);
             }
         }
     }

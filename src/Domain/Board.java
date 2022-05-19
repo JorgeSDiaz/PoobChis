@@ -5,6 +5,9 @@ import java.awt.*;
 public class Board {
     Box[] boxes;
 
+    /**
+     * Board builder
+     */
     public Board(){
         boxes = new Box[101];
         createSectionPlayerOne();
@@ -14,6 +17,9 @@ public class Board {
         boxes[100] = new Box(155, 155, 263, 268, new Color(255, 180, 237));
     }
 
+    /**
+     * Creates the columns and home of player 1
+     */
     private void createSectionPlayerOne(){
         boxes[0] = new Home(220, 220, 5, 5, 8, Color.red);
         createFirstColumnPOne();
@@ -21,6 +27,9 @@ public class Board {
         createFinalColumnPOne();
     }
 
+    /**
+     * first column of player 1
+     */
     private void createFirstColumnPOne(){
         boxes[4] = new Box(70, 30, 230, 5, null);
         boxes[5] = new Box(70, 30, 230, 37, null);
@@ -32,6 +41,9 @@ public class Board {
         boxes[11] = new Box(new int[]{300, 300, 230, 270}, new int[]{260, 230, 230, 260}, 70, 30, null);
     }
 
+    /**
+     * second column of player 1
+     */
     private void createSecondColumnPOne(){
         boxes[12] = new Box(new int[]{230, 258, 258, 230}, new int[]{235, 260, 305, 305}, 30, 70, null);
         boxes[13] = new Box(30, 70, 197, 235, null);
@@ -43,6 +55,9 @@ public class Board {
         boxes[19] = new Box(30, 70, 5, 235, null);
     }
 
+    /**
+     * final column of player 1
+     */
     private void createFinalColumnPOne(){
         boxes[71] = new Box(70, 30, 305, 5, null);
         boxes[72] = new Box(70, 30, 305, 37, Color.red);
@@ -54,6 +69,9 @@ public class Board {
         boxes[78] = new Box(70, 30, 305, 229, Color.red);
     }
 
+    /**
+     * Creates the columns and home of player 2
+     */
     private void createSectionPlayerTwo(){
         boxes[1] = new Home(220, 220, 5, 464, 25, Color.yellow);
         createFirstColumnPTwo();
@@ -61,6 +79,9 @@ public class Board {
         createFinalColumnPTwo();
     }
 
+    /**
+     * first column of player 2
+     */
     private void createFirstColumnPTwo(){
         boxes[21] = new Box(30, 70, 5, 385, null);
         boxes[22] = new Box(30, 70, 37, 385, null);
@@ -72,6 +93,9 @@ public class Board {
         boxes[28] = new Box(new int[]{230, 258, 258, 230}, new int[]{385, 385, 430, 455}, 30, 70, null);
     }
 
+    /**
+     * second column of player 2
+     */
     private void createSecondColumnPTwo(){
         boxes[29] = new Box(new int[]{300, 265, 230, 300}, new int[]{432, 432, 460, 460}, 30, 70, null);
         boxes[30] = new Box(70, 30, 230, 657, null);
@@ -83,6 +107,9 @@ public class Board {
         boxes[36] = new Box(70, 30, 230, 465, null);
     }
 
+    /**
+     * final column of player 2
+     */
     private void createFinalColumnPTwo(){
         boxes[20] = new Box(30, 70, 5, 310, null);
         boxes[79] = new Box(30, 70, 37, 310, Color.yellow);
@@ -94,6 +121,9 @@ public class Board {
         boxes[85] = new Box(30, 70, 229, 310, Color.yellow);
     }
 
+    /**
+     * Creates the columns and home of player 3
+     */
     private void createSectionPlayerThree(){
         boxes[2] = new Home(220, 220, 458, 464, 42, Color.blue);
         createFirstColumnPThree();
@@ -101,6 +131,9 @@ public class Board {
         createFinalColumnPThree();
     }
 
+    /**
+     * first column of player 3
+     */
     private void createFirstColumnPThree(){
         boxes[38] = new Box(70, 30, 380, 657, null);
         boxes[39] = new Box(70, 30, 380, 625, null);
@@ -112,6 +145,9 @@ public class Board {
         boxes[45] = new Box(new int[]{450, 420, 380, 380}, new int[]{460, 432, 432, 460}, 70, 30, null);
     }
 
+    /**
+     * second column of player 3
+     */
     private void createSecondColumnPThree(){
         boxes[46] = new Box(new int[]{422, 452, 452, 422}, new int[]{385, 385, 455, 425}, 30, 70, null);
         boxes[47] = new Box(30, 70, 647, 385, null);
@@ -123,6 +159,9 @@ public class Board {
         boxes[53] = new Box(30, 70, 455, 385, null);
     }
 
+    /**
+     * final column of player 3
+     */
     private void createFinalColumnPThree(){
         boxes[37] = new Box(70, 30, 305, 657, null);
         boxes[86] = new Box(70, 30, 305, 433, Color.blue);
@@ -135,6 +174,9 @@ public class Board {
 
     }
 
+    /**
+     * Creates the columns and home of player 4
+     */
     private void createSectionPlayerFour(){
         boxes[3] = new Home(220, 220, 458, 5, 42, Color.green);
         createFirstColumnPFour();
@@ -142,6 +184,9 @@ public class Board {
         createFinalColumnPFour();
     }
 
+    /**
+     * first column of player 4
+     */
     private void createFirstColumnPFour(){
         boxes[55] = new Box(30, 70, 455, 235, null);
         boxes[56] = new Box(30, 70, 487, 235, null);
@@ -153,6 +198,9 @@ public class Board {
         boxes[62] = new Box(new int[]{422, 452, 452, 422}, new int[]{265, 235, 305, 305}, 30, 70, null);
     }
 
+    /**
+     * second column of player 4
+     */
     private void createSecondColumnPFour(){
         boxes[63] = new Box(new int[]{420, 450, 380, 380}, new int[]{260, 230, 230, 260}, 70, 30, null);
         boxes[64] = new Box(70, 30, 380, 5, null);
@@ -165,6 +213,9 @@ public class Board {
 
     }
 
+    /**
+     * final column of player 4
+     */
     private void createFinalColumnPFour(){
         boxes[54] = new Box(30, 70, 647, 310, null);
         boxes[93] = new Box(30, 70, 423, 310, Color.green);
@@ -176,10 +227,19 @@ public class Board {
         boxes[99] = new Box(30, 70, 615, 310, Color.green);
     }
 
+    /**
+     * returns the boxes that compose the board
+     * @return Box[] boxes
+     */
     public Box[] getBoxes(){
         return boxes;
     }
 
+    /**
+     * returns a specific square of those that compose the board.
+     * @param position int box number
+     * @return Box boxes[position]
+     */
     public Box getBox(int position){
         return boxes[position];
     }
