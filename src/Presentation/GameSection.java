@@ -19,8 +19,8 @@ public class GameSection extends JPanel {
      * constructor of the panel containing the player's menu and where the board is displayed
      */
     public GameSection(){
-        this.parchis = new Parchis(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList("normal", "rocket", "normal", "normal")),
-                new ArrayList<>(Arrays.asList("normal", "rocket", "normal", "normal")))));
+        this.parchis = new Parchis(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList("rocket", "rocket", "rocket", "rocket")),
+                new ArrayList<>(Arrays.asList("rocket", "engineer", "normal", "normal")))));
         preparePanel();
         initComponents();
         prepareComponents();
@@ -40,7 +40,8 @@ public class GameSection extends JPanel {
     private void initComponents(){
         rolldice = new JButton("Roll Dice");
         gamePanel = new GamePanel(parchis);
-        playerPanel = new PlayerPanel(parchis.getDices()[0].getValue(), parchis.getDices()[1].getValue());
+        playerPanel = new PlayerPanel(parchis.getDices()[0].getValue(), parchis.getDices()[1].getValue(),
+                parchis.getCurrentPlayer());
     }
 
     /**
@@ -63,6 +64,7 @@ public class GameSection extends JPanel {
         parchis.getDices()[1].roll();
         playerPanel.actionRoll(parchis.getDices()[0].getValue(), parchis.getDices()[1].getValue());
         parchis.play();
+        playerPanel.setPlayer(parchis.getCurrentPlayer());
         gamePanel.setBoxes(parchis.getBoard().getBoxes());
         gamePanel.repaint();
     }

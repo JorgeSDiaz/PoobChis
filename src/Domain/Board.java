@@ -44,7 +44,7 @@ public class Board {
         boxes[7] = new Box(70, 30, 230, 101, null);
         boxes[8] = new Box(70, 30, 230, 133, Color.red);
         boxes[9] = new Box(70, 30, 230, 165, null);
-        boxes[10] = new Box(70, 30, 230, 197, null);
+        boxes[10] = new Advance(70, 30, 230, 197);
         boxes[11] = new Box(new int[]{300, 300, 230, 270}, new int[]{260, 230, 230, 260}, 70, 30, null);
     }
 
@@ -110,7 +110,7 @@ public class Board {
         boxes[32] = new Box(70, 30, 230, 593, Color.gray);
         boxes[33] = new Box(70, 30, 230, 561, null);
         boxes[34] = new Box(70, 30, 230, 529, null);
-        boxes[35] = new Box(70, 30, 230, 497, null);
+        boxes[35] = new Back(70, 30, 230, 497);
         boxes[36] = new Box(70, 30, 230, 465, null);
     }
 
@@ -142,7 +142,7 @@ public class Board {
      * first column of player 3
      */
     private void createFirstColumnPThree(){
-        boxes[38] = new Box(70, 30, 380, 657, null);
+        boxes[38] = new Back(70, 30, 380, 657);
         boxes[39] = new Box(70, 30, 380, 625, null);
         boxes[40] = new Box(70, 30, 380, 593, null);
         boxes[41] = new Box(70, 30, 380, 561, null);
@@ -214,7 +214,7 @@ public class Board {
         boxes[65] = new Box(70, 30, 380, 37, null);
         boxes[66] = new Box(70, 30, 380, 69, Color.gray);
         boxes[67] = new Box(70, 30, 380, 101, null);
-        boxes[68] = new Box(70, 30, 380, 133, null);
+        boxes[68] = new Advance(70, 30, 380, 133);
         boxes[69] = new Box(70, 30, 380, 165, null);
         boxes[70] = new Box(70, 30, 380, 197, null);
 

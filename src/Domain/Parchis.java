@@ -1,5 +1,6 @@
 package Domain;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Parchis {
@@ -60,6 +61,10 @@ public class Parchis {
         return (parchis);
     }
 
+    public int getCurrentPlayer(){
+        return currentPlayer;
+    }
+
     /**
      * Method that handles conditions when playing the game
      */
@@ -77,6 +82,14 @@ public class Parchis {
                     int newBox = Math.min(token.getBox() + dices[0].getValue() + dices[1].getValue(), 100);
                     cantTokens = board.getBox(newBox).getCantToken();
 
+                    if (token instanceof Advantageous && token.getTurns() == 3){
+                        moveToken(cantTokens, token.getBox() + 3);
+                        token.resetTurns();
+                    } else if (token instanceof Engineer){
+                        board.getBox(token.getBox()).setColor(Color.black);
+                        board.getBox(newBox).setColor(Color.gray);
+                    }
+
                     moveToken(cantTokens, newBox);
                 }
             } else {
@@ -87,12 +100,7 @@ public class Parchis {
                 moveToken(cantTokens, newBox);
             }
         }
-
-        //if (currentPlayer == 0){
-            //currentPlayer = 1;
-        //} else {
-            //currentPlayer = 0;
-        //}
+        changeTurn(dices[0].getValue(), dices[1].getValue());
     }
 
     private void outOfHome(int cantTokens){
@@ -115,5 +123,19 @@ public class Parchis {
         int yPosit = (board.getBox(newBox).getYCoordinate() + 2);
 
         token.moveTo(xPosit, yPosit, newBox);
+
+        if (board.getBox(newBox) instanceof Advance){
+            moveToken(cantTokens, token.getBox() + 5);
+        } else if (board.getBox(newBox) instanceof Back){
+            moveToken(cantTokens, token.getBox() - 5);
+        }
+    }
+
+    private void changeTurn(int valueOne, int valueTwo){
+        if (currentPlayer == 0 && valueOne != valueTwo){
+            currentPlayer = 1;
+        } else if (currentPlayer == 1 && valueOne != valueTwo){
+            currentPlayer = 0;
+        }
     }
 }
