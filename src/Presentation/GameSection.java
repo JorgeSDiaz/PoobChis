@@ -18,9 +18,8 @@ public class GameSection extends JPanel {
     /**
      * constructor of the panel containing the player's menu and where the board is displayed
      */
-    public GameSection(){
-        this.parchis = new Parchis(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList("rocket", "rocket", "rocket", "rocket")),
-                new ArrayList<>(Arrays.asList("rocket", "engineer", "normal", "normal")))));
+    public GameSection(ArrayList tokensPlayerOne, ArrayList tokensPlayerTwo){
+        this.parchis = new Parchis(tokensPlayerOne, tokensPlayerTwo);
         preparePanel();
         initComponents();
         prepareComponents();

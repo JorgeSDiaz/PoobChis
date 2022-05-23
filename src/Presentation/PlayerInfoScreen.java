@@ -23,8 +23,8 @@ public class PlayerInfoScreen extends JFrame {
     /**
      * Builder of the player screen that prepares the elements and the actions
      */
-    public PlayerInfoScreen(int n) {
-        numberPlayers = n;
+    public PlayerInfoScreen(int numberplayers) {
+        numberPlayers = numberplayers;
         prepareElements();
         prepareActions();
     }
@@ -37,6 +37,7 @@ public class PlayerInfoScreen extends JFrame {
         setSize(632, 630);
         setResizable(false);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         prepareName();
         prepareTokens();
         prepareButtons();
@@ -49,19 +50,19 @@ public class PlayerInfoScreen extends JFrame {
         containerTokens = new JPanel();
         containerTokens.setBorder(new CompoundBorder(new EmptyBorder(5, 5, 5, 5), new TitledBorder("Choose your tokens to game (4 tokens)")));
         containerTokens.setLayout(new GridLayout(3, 2, 3, 3));
-        normal = new JToggleButton(new ImageIcon("images/normal.png"));
+        normal = new JToggleButton("normal",(new ImageIcon("images/normal.png")));
         normal.setSelectedIcon(new ImageIcon("images/selected.png"));
-        rocket = new JToggleButton(new ImageIcon("images/rocket.png"));
+        rocket = new JToggleButton("rocket",(new ImageIcon( "images/rocket.png")));
         rocket.setSelectedIcon(new ImageIcon("images/selected.png"));
-        vacuum = new JToggleButton(new ImageIcon("images/vacuum.png"));
+        vacuum = new JToggleButton("vacuum",(new ImageIcon("images/vacuum.png")));
         vacuum.setSelectedIcon(new ImageIcon("images/selected.png"));
-        jumping = new JToggleButton(new ImageIcon("images/jumping.png"));
+        jumping = new JToggleButton("jumping",(new ImageIcon("images/jumping.png")));
         jumping.setSelectedIcon(new ImageIcon("images/selected.png"));
-        advantageous = new JToggleButton(new ImageIcon("images/advantageous.png"));
+        advantageous = new JToggleButton("advantageous",(new ImageIcon("images/advantageous.png")));
         advantageous.setSelectedIcon(new ImageIcon("images/selected.png"));
-        engineer = new JToggleButton(new ImageIcon("images/engineer.png"));
+        engineer = new JToggleButton("engineer",(new ImageIcon("images/engineer.png")));
         engineer.setSelectedIcon(new ImageIcon("images/selected.png"));
-        random = new JToggleButton(new ImageIcon("images/random.png"));
+        random = new JToggleButton("random",(new ImageIcon("images/random.png")));
         random.setSelectedIcon(new ImageIcon("images/selected.png"));
         containerTokens.add(normal);
         containerTokens.add(rocket);
@@ -116,8 +117,9 @@ public class PlayerInfoScreen extends JFrame {
                             || tokensSelected.size() > 1 && tokensSelected.size() < 4) {
                         JOptionPane.showMessageDialog(null, "Please choose your tokens or enter your name");
                     } else {
-                        getInfoP1();
-                        wildcardsScreen = new WildcardsScreen();
+                        getNameP1();
+                        getTokensP1();
+                        wildcardsScreen = new WildcardsScreen(getNameP1(), getTokensP1(), getNameP2(), getTokensP2());
                         wildcardsScreen.setVisible(true);
                         setVisible(false);
                     }
@@ -126,7 +128,8 @@ public class PlayerInfoScreen extends JFrame {
                             || tokensSelected.size() > 1 && tokensSelected.size() < 4) {
                         JOptionPane.showMessageDialog(null, "Please choose your tokens or enter your name");
                     } else {
-                        getInfoP2();
+                        getNameP2();
+                        getTokensP2();
                         tokensSelected.clear();
                         next.addActionListener(new ActionListener() {
                             @Override
@@ -172,10 +175,13 @@ public class PlayerInfoScreen extends JFrame {
                 if(random.isSelected()){
                     for(int i = 0; i <= 5; i++){
                         tokens[i].setSelected(false);
+                        tokensSelected.clear();
                     }
-                    tokensSelected.clear();
-                    tokensSelected.add(random.getName());
-                } else{tokensSelected.remove(random.getName());}
+                    tokensSelected.add("normal");
+                    tokensSelected.add("rocket");
+                    tokensSelected.add("vacuum");
+                    tokensSelected.add("jumping");
+                } else{tokensSelected.remove(random.getText());}
             }
         });
         normal.addActionListener(new ActionListener() {
@@ -218,28 +224,6 @@ public class PlayerInfoScreen extends JFrame {
     }
 
     /**
-     * Obtains in an arraylist the name and tokens entered by the player 2
-     * @return An arraylist with the name of the player in the first position and the chosen tokens
-     */
-    public ArrayList getInfoP2(){
-        ArrayList<String> InfoPlayer2 = new ArrayList<String>();
-        InfoPlayer2.add(name.getText());
-        InfoPlayer2.add(String.valueOf(tokensSelected));
-        return(InfoPlayer2);
-    }
-
-    /**
-     * Obtains in an arraylist the name and tokens entered by the player single o player 1
-     * @return An arraylist with the name of the player in the first position and the chosen tokens
-     */
-    public ArrayList getInfoP1(){
-        ArrayList<String> InfoPlayer1 = new ArrayList<String>();
-        InfoPlayer1.add(name.getText());
-        InfoPlayer1.add(String.valueOf(tokensSelected));
-        return(InfoPlayer1);
-    }
-
-    /**
      * Verifies that the selected Tokens are 4 (or 1 in case of selecting random), sends an error message in case of trying to choose more
      * @param token= jtogglebutton selected (except random)
      */
@@ -249,15 +233,45 @@ public class PlayerInfoScreen extends JFrame {
         }
         else if (token.isSelected()) {
             if (tokensSelected.size() <= 3) {
-                tokensSelected.add(token.getName());
+                tokensSelected.add(token.getText());
             } else {
                 if (token.isSelected() == false) {
-                    tokensSelected.remove(token.getName());
+                    tokensSelected.remove(token.getText());
                 } else {
                     token.setSelected(false);
                     JOptionPane.showMessageDialog(null, "Just pick 4 tokens >:(");
                 }
             }
-        } else if (token.isSelected() == false) { tokensSelected.remove(token.getName()); }
+        } else if (token.isSelected() == false) { tokensSelected.remove(token.getText()); }
+    }
+
+    /**
+     * Obtains the name by the player 2
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public String getNameP2(){
+        return (name.getText());
+    }
+
+    /**
+     * Obtains the name by the player single o player 1
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public String getNameP1(){
+        return(name.getText());
+    }
+    /**
+     * Obtains in an arraylist the tokens entered by the player single o player 1
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public ArrayList getTokensP1(){
+        return(tokensSelected);
+    }
+    /**
+     * Obtains in an arraylist the tokens entered by the player 2
+     * @return An arraylist with the name of the player in the first position and the chosen tokens
+     */
+    public ArrayList getTokensP2(){
+        return(tokensSelected);
     }
 }

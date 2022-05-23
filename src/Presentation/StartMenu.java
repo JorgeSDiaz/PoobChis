@@ -12,7 +12,7 @@ public class StartMenu extends JFrame {
     private JButton twoPlayers;
     private JButton onePlayer;
     private JPanel container;
-    private ParchisGUI interfaz;
+
 
     /**
      * Builder of the start menu that prepares the elements and the actions
@@ -30,6 +30,7 @@ public class StartMenu extends JFrame {
         setSize(642, 640);
         setResizable(false);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         prepareSignboard();
         prepareButtons();
     }

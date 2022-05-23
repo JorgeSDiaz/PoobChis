@@ -8,19 +8,16 @@ public class Parchis {
     Board board;
     int currentPlayer;
     ArrayList<ArrayList<Token>> tokensInGame;
-    ArrayList<ArrayList<String>> tokensPlayers;
-
     private static Parchis parchis = null;
 
     /**
      * parchis builder
      */
-    public Parchis(ArrayList<ArrayList<String>> tokensPlayers){
+    public Parchis(ArrayList tokensPlayerOne, ArrayList tokensPlayerTwo){
         dices = new Dice[]{new Dice(), new Dice()};
-        this.tokensPlayers = tokensPlayers;
         tokensInGame = new ArrayList<ArrayList<Token>>();
         intiTokensArray();
-        initBoard(tokensPlayers.get(0), tokensPlayers.get(1));
+        initBoard(tokensPlayerOne,tokensPlayerTwo);
         currentPlayer = 0;
     }
 
@@ -54,9 +51,9 @@ public class Parchis {
         return board;
     }
 
-    public static Parchis getParchis(ArrayList<ArrayList<String>> tokensPlayers) {
+    public static Parchis getParchis(ArrayList tokensPlayerOne, ArrayList tokensPlayerTwo) {
         if (parchis == null) {
-            parchis = new Parchis(tokensPlayers);
+            parchis = new Parchis(tokensPlayerOne,tokensPlayerTwo);
         }
         return (parchis);
     }

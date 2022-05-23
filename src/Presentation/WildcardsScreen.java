@@ -1,5 +1,6 @@
 package Presentation;
 
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -17,8 +18,14 @@ public class WildcardsScreen extends JFrame {
     JButton play, wildcardsInfo;
     ParchisGUI interfaz;
     ArrayList<String> wildcardsSelected = new ArrayList<String>();
+    private String PlayerOne, PlayerTwo;
+    private ArrayList tokensPlayerOne, tokensPlayerTwo;
 
-    public WildcardsScreen(){
+    public WildcardsScreen(String playerOne, ArrayList<String> TokensPlayerOne, String playerTwo,ArrayList<String> TokensPlayerTwo){
+        PlayerOne = playerOne;
+        PlayerTwo = playerTwo;
+        tokensPlayerOne = TokensPlayerOne;
+        tokensPlayerTwo = TokensPlayerTwo;
         prepareElements();
         prepareActions();
     }
@@ -31,6 +38,7 @@ public class WildcardsScreen extends JFrame {
         setSize(632, 630);
         setResizable(false);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         prepareName();
         prepareWildcards();
         prepareButtons();
@@ -99,13 +107,24 @@ public class WildcardsScreen extends JFrame {
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (wildcardsSelected.size() == 0||wildcardsSelected.size() > 0 && wildcardsSelected.size() < 4) {
+                if (wildcardsSelected.size() == 0 || wildcardsSelected.size() > 0 && wildcardsSelected.size() < 4) {
                     JOptionPane.showMessageDialog(null, "Please choose your wild cards");
                 } else {
                     getWildcards();
-                    interfaz = new ParchisGUI();
-                    interfaz.setVisible(true);
-                    setVisible(false);
+                    if (PlayerTwo == "" && tokensPlayerTwo.isEmpty() == true) {
+                        PlayerTwo = "Player Machine";
+                        tokensPlayerTwo.add("normal");
+                        tokensPlayerTwo.add("advantageous");
+                        tokensPlayerTwo.add("rocket");
+                        tokensPlayerTwo.add("engineer");
+                        interfaz = new ParchisGUI(PlayerOne, tokensPlayerOne, PlayerTwo, tokensPlayerTwo);
+                        interfaz.setVisible(true);
+                        setVisible(false);
+                    }else{
+                        interfaz = new ParchisGUI(PlayerOne, tokensPlayerOne, PlayerTwo, tokensPlayerTwo);
+                        interfaz.setVisible(true);
+                        setVisible(false);
+                    }
                 }
             }
         });

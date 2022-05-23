@@ -1,14 +1,22 @@
 package Presentation;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ParchisGUI extends JFrame {
     private GameSection gameSection;
+    static StartMenu startMenu;
+    private String PlayerOne, PlayerTwo;
+    private ArrayList tokensPlayerOne, tokensPlayerTwo;
 
     /**
      * parchis window builder
      */
-    public ParchisGUI(){
+    public ParchisGUI(String playerOne, ArrayList<String> TokensPlayerOne, String playerTwo, ArrayList<String> TokensPlayerTwo){
+        PlayerOne = playerOne;
+        PlayerTwo = playerTwo;
+        tokensPlayerOne = TokensPlayerOne;
+        tokensPlayerTwo = TokensPlayerTwo;
         initElements();
         prepareElements();
     }
@@ -17,7 +25,8 @@ public class ParchisGUI extends JFrame {
      * initializes the window elements
      */
     private void initElements(){
-        gameSection = new GameSection();
+
+        gameSection = new GameSection(tokensPlayerOne, tokensPlayerTwo);
     }
 
     /**
@@ -47,7 +56,7 @@ public class ParchisGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        ParchisGUI startMenu = new ParchisGUI();
+        startMenu = new StartMenu();
         startMenu.setVisible(true);
     }
 }
