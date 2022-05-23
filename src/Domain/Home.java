@@ -1,11 +1,12 @@
 package Domain;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Home extends Box{
     int startBox;
-    Token[] tokens;
-    int[][] coordinatesTokens;
+    ArrayList<Token> tokens;
 
     /**
      * home box builder
@@ -16,32 +17,56 @@ public class Home extends Box{
      * @param startBox outbox that corresponds to the home box
      * @param color Home box color
      */
-    public Home(int width, int height, int xCoordinate, int yCoordinate, int startBox, Color color){
+    public Home(int width, int height, int xCoordinate, int yCoordinate, int startBox, Color color, ArrayList<String> tokens){
         super(width, height, xCoordinate, yCoordinate, color);
         this.cantToken = 4;
         this.startBox = startBox;
-        this.coordinatesTokens = new int[][]{{xCoordinate + 45, yCoordinate + 45},
-                {xCoordinate + 45, yCoordinate + 145}, {xCoordinate + 145, yCoordinate + 45},
-                {xCoordinate + 145, yCoordinate + 145}};
-        this.tokens = new Token[]{new Token(xCoordinate + 45,yCoordinate + 45),
-                new Token(xCoordinate + 45, yCoordinate + 145),
-                new Token(xCoordinate + 145, yCoordinate + 45),
-                new Token(xCoordinate + 145, yCoordinate + 145)};
+        this.tokens = new ArrayList<Token>(4);
+        setTokens(tokens.isEmpty() ? new ArrayList<>(Arrays.asList("normal", "normal", "normal", "normal")) : tokens);
     }
 
     /**
      * define the set of tokens for this home
-     * @param newTokens set of tokens
+     * @param tokens
      */
-    public void setTokens(Token[] newTokens){
-        this.tokens = tokens;
+    public void setTokens(ArrayList<String> tokens) {
+        for (String s : tokens) {
+            if (s.equals("normal")) {
+                this.tokens.add(new Token());
+            } else if (s.equals("rocket")) {
+                this.tokens.add(new Rocket());
+            } else if (s.equals("vacuum")) {
+                this.tokens.add(new Vacuum());
+            } else if (s.equals("jumping")) {
+                this.tokens.add(new Jumping());
+            } else if (s.equals("advantageous")) {
+                this.tokens.add(new Advantageous());
+            } else if (s.equals("engineer")) {
+                this.tokens.add(new Engineer());
+            }
+            this.addToken();
+        }
+    }
+
+    private void addToken(){
+        for (int i = 0; i < tokens.size(); i++){
+            if (i == 0){
+                this.tokens.get(i).setPosition(xCoordinate + 45, yCoordinate + 45);
+            } else if (i == 1) {
+                this.tokens.get(i).setPosition(xCoordinate + 45, yCoordinate + 145);
+            } else if (i == 2) {
+                this.tokens.get(i).setPosition(xCoordinate + 145, yCoordinate + 45);
+            } else if (i == 3) {
+                this.tokens.get(i).setPosition(xCoordinate + 145, yCoordinate + 145);
+            }
+        }
     }
 
     /**
      * returns the tokens inside the home box
      * @return list of tokens
      */
-    public Token[] getTokens(){
+    public ArrayList<Token> getTokens(){
         return tokens;
     }
 

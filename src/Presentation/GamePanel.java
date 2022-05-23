@@ -69,12 +69,11 @@ public class GamePanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < 4; i++){
             Home home = (Home) boxes[i];
-            for (int j = 0; j < 4; j++){
-                Token token = home.getTokens()[j];
-                g2d.setColor(token.getSecondColor());
-                g2d.fillOval(token.getXCoordinate(), token.getYCoordinate(), 25, 25);
+            for (Token t: home.getTokens()){
+                g2d.setColor(t.getSecondColor());
+                g2d.fillOval(t.getXCoordinate(), t.getYCoordinate(), 25, 25);
                 g2d.setColor(home.getColor());
-                g2d.fillRect(token.getXCoordinate() + 5, token.getYCoordinate() + 5, 15, 15);
+                g2d.fillRect(t.getXCoordinate() + 5, t.getYCoordinate() + 5, 15, 15);
             }
         }
     }

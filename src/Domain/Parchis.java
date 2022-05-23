@@ -7,17 +7,19 @@ public class Parchis {
     Board board;
     int currentPlayer;
     ArrayList<ArrayList<Token>> tokensInGame;
+    ArrayList<ArrayList<String>> tokensPlayers;
 
     private static Parchis parchis = null;
 
     /**
      * parchis builder
      */
-    public Parchis(){
+    public Parchis(ArrayList<ArrayList<String>> tokensPlayers){
         dices = new Dice[]{new Dice(), new Dice()};
-        board = new Board();
+        this.tokensPlayers = tokensPlayers;
         tokensInGame = new ArrayList<ArrayList<Token>>();
         intiTokensArray();
+        initBoard(tokensPlayers.get(0), tokensPlayers.get(1));
         currentPlayer = 0;
     }
 
@@ -29,6 +31,10 @@ public class Parchis {
             ArrayList<Token> arrayList = new ArrayList<Token>();
             tokensInGame.add(arrayList);
         }
+    }
+
+    private void initBoard(ArrayList<String> playerOne, ArrayList<String> playerTwo){
+        board = new Board(playerOne, playerTwo);
     }
 
     /**
@@ -47,9 +53,9 @@ public class Parchis {
         return board;
     }
 
-    public static Parchis getParchis() {
+    public static Parchis getParchis(ArrayList<ArrayList<String>> tokensPlayers) {
         if (parchis == null) {
-            parchis = new Parchis();
+            parchis = new Parchis(tokensPlayers);
         }
         return (parchis);
     }
@@ -59,33 +65,26 @@ public class Parchis {
      */
     public void play(){
         Home home = (Home) board.getBox(currentPlayer);
+        int cantTokens = 0;
         if (home.getCantToken() != 0){
-            int cantTokensStartBox = board.getBox(home.getStartBox()).getCantToken();
-            if (cantTokensStartBox < 2){
+            cantTokens = board.getBox(home.getStartBox()).getCantToken();
+            if (cantTokens < 2){
                 if (dices[0].getValue() == 5 || dices[1].getValue() == 5 ||
                         (dices[0].getValue() + dices[1].getValue()) == 5){
-                    int position = home.cantToken - 1;
-                    Token token = home.getTokens()[position];
-                    token.setXCoordinate(board.getBox(home.getStartBox()).getXCoordinate()
-                            + 3 + (35 * cantTokensStartBox));
-                    token.setYCoordinate(board.getBox(home.getStartBox()).getYCoordinate() + 2);
-                    token.setBox(home.getStartBox());
-                    tokensInGame.get(currentPlayer).add(token);
-                    board.getBox(home.getStartBox()).plusCantToken(1);
-                    home.minusCantToken(1);
-                } else if (cantTokensStartBox > 0){
+                    outOfHome(cantTokens);
+                } else if (cantTokens > 0){
                     Token token = tokensInGame.get(currentPlayer).get(0);
                     int newBox = Math.min(token.getBox() + dices[0].getValue() + dices[1].getValue(), 100);
-                    token.setBox(newBox);
-                    token.setXCoordinate((board.getBox(newBox).getXCoordinate() + 3));
-                    token.setYCoordinate((board.getBox(newBox).getYCoordinate() + 2));
+                    cantTokens = board.getBox(newBox).getCantToken();
+
+                    moveToken(cantTokens, newBox);
                 }
             } else {
                 Token token = tokensInGame.get(currentPlayer).get(0);
-                int newBox = token.getBox() + dices[0].getValue() + dices[1].getValue();
-                token.setBox(newBox);
-                token.setXCoordinate((board.getBox(newBox).getXCoordinate() + 3));
-                token.setYCoordinate((board.getBox(newBox).getYCoordinate() + 2));
+                int newBox = Math.min(token.getBox() + dices[0].getValue() + dices[1].getValue(), 100);
+                cantTokens = board.getBox(newBox).getCantToken();
+
+                moveToken(cantTokens, newBox);
             }
         }
 
@@ -94,5 +93,27 @@ public class Parchis {
         //} else {
             //currentPlayer = 0;
         //}
+    }
+
+    private void outOfHome(int cantTokens){
+        Home home = (Home) board.getBox(currentPlayer);
+        int position = home.cantToken - 1;
+        int xPosit = board.getBox(home.getStartBox()).getXCoordinate() + 3 + (35 * cantTokens);
+        int yPosit = board.getBox(home.getStartBox()).getYCoordinate() + 2;
+
+        Token token = home.getTokens().get(position);
+        token.moveTo(xPosit, yPosit, home.getStartBox());
+
+        tokensInGame.get(currentPlayer).add(token);
+        board.getBox(home.getStartBox()).plusCantToken(1);
+        home.minusCantToken(1);
+    }
+
+    private void moveToken(int cantTokens, int newBox){
+        Token token = tokensInGame.get(currentPlayer).get(0);
+        int xPosit = (board.getBox(newBox).getXCoordinate() + 3 + (35 * cantTokens));
+        int yPosit = (board.getBox(newBox).getYCoordinate() + 2);
+
+        token.moveTo(xPosit, yPosit, newBox);
     }
 }

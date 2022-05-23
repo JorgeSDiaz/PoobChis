@@ -1,7 +1,5 @@
 package Presentation;
 
-import Domain.Parchis;
-
 import javax.swing.*;
 
 public class ParchisGUI extends JFrame {
@@ -49,7 +47,7 @@ public class ParchisGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        StartMenu startMenu = new StartMenu();
+        ParchisGUI startMenu = new ParchisGUI();
         startMenu.setVisible(true);
     }
 }

@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameSection extends JPanel {
     private Parchis parchis;
@@ -17,7 +19,8 @@ public class GameSection extends JPanel {
      * constructor of the panel containing the player's menu and where the board is displayed
      */
     public GameSection(){
-        this.parchis = new Parchis();
+        this.parchis = new Parchis(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList("normal", "rocket", "normal", "normal")),
+                new ArrayList<>(Arrays.asList("normal", "rocket", "normal", "normal")))));
         preparePanel();
         initComponents();
         prepareComponents();

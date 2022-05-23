@@ -1,15 +1,18 @@
 package Domain;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board {
     Box[] boxes;
-
+    ArrayList<String> tokenOne,tokensTwo;
     /**
      * Board builder
      */
-    public Board(){
+    public Board(ArrayList<String> tokensPOne, ArrayList<String> tokensPTwo){
         boxes = new Box[101];
+        this.tokenOne = tokensPOne;
+        this.tokensTwo = tokensPTwo;
         createSectionPlayerOne();
         createSectionPlayerTwo();
         createSectionPlayerThree();
@@ -17,11 +20,15 @@ public class Board {
         boxes[100] = new Box(155, 155, 263, 268, new Color(255, 180, 237));
     }
 
+    public Board(){
+        this(new ArrayList<>(), new ArrayList<>());
+    }
+
     /**
      * Creates the columns and home of player 1
      */
     private void createSectionPlayerOne(){
-        boxes[0] = new Home(220, 220, 5, 5, 8, Color.red);
+        boxes[0] = new Home(220, 220, 5, 5, 8, Color.red, tokenOne);
         createFirstColumnPOne();
         createSecondColumnPOne();
         createFinalColumnPOne();
@@ -73,7 +80,7 @@ public class Board {
      * Creates the columns and home of player 2
      */
     private void createSectionPlayerTwo(){
-        boxes[1] = new Home(220, 220, 5, 464, 25, Color.yellow);
+        boxes[1] = new Home(220, 220, 5, 464, 25, Color.yellow, tokensTwo);
         createFirstColumnPTwo();
         createSecondColumnPTwo();
         createFinalColumnPTwo();
@@ -125,7 +132,7 @@ public class Board {
      * Creates the columns and home of player 3
      */
     private void createSectionPlayerThree(){
-        boxes[2] = new Home(220, 220, 458, 464, 42, Color.blue);
+        boxes[2] = new Home(220, 220, 458, 464, 42, Color.blue, new ArrayList<>());
         createFirstColumnPThree();
         createSecondColumnPThree();
         createFinalColumnPThree();
@@ -178,7 +185,7 @@ public class Board {
      * Creates the columns and home of player 4
      */
     private void createSectionPlayerFour(){
-        boxes[3] = new Home(220, 220, 458, 5, 42, Color.green);
+        boxes[3] = new Home(220, 220, 458, 5, 42, Color.green, new ArrayList<>());
         createFirstColumnPFour();
         createSecondColumnPFour();
         createFinalColumnPFour();

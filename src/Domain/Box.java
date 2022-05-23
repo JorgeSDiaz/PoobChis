@@ -117,4 +117,8 @@ public class Box {
     public int getCantToken(){
         return cantToken;
     }
+
+    public void setColor(Color newColor){
+        this.color = newColor;
+    }
 }
