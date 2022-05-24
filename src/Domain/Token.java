@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Token {
     protected int xCoordinate, yCoordinate;
-    protected int box, turns;
+    protected int box;
     protected Color SECOND_COLOR = new Color(153, 102, 255);
 
     /**
@@ -15,7 +15,6 @@ public class Token {
     public Token(int xCoordinate, int yCoordinate){
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
-        this.turns = 0;
     }
 
     public Token(){
@@ -54,14 +53,6 @@ public class Token {
         return box;
     }
 
-    public int getTurns(){
-        return turns;
-    }
-
-    public void resetTurns(){
-        turns = 0;
-    }
-
     public void setPosition(int xCoordinate, int yCoordinate){
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
@@ -70,6 +61,5 @@ public class Token {
     public void moveTo(int xCoordinate, int yCoordinate, int newBox){
         this.setPosition(xCoordinate, yCoordinate);
         this.box = newBox;
-        this.turns += 1;
     }
 }

@@ -79,9 +79,11 @@ public class Parchis {
                     int newBox = Math.min(token.getBox() + dices[0].getValue() + dices[1].getValue(), 100);
                     cantTokens = board.getBox(newBox).getCantToken();
 
-                    if (token instanceof Advantageous && token.getTurns() == 3){
-                        moveToken(cantTokens, token.getBox() + 3);
-                        token.resetTurns();
+                    if (token instanceof Advantageous){
+                        if (((Advantageous)token).getTurns() == 3){
+                            moveToken(cantTokens, token.getBox() + 3);
+                            ((Advantageous)token).resetTurns();
+                        }
                     } else if (token instanceof Engineer){
                         board.getBox(token.getBox()).setColor(Color.black);
                         board.getBox(newBox).setColor(Color.gray);
@@ -89,15 +91,26 @@ public class Parchis {
 
                     moveToken(cantTokens, newBox);
                 }
+
             } else {
                 Token token = tokensInGame.get(currentPlayer).get(0);
                 int newBox = Math.min(token.getBox() + dices[0].getValue() + dices[1].getValue(), 100);
                 cantTokens = board.getBox(newBox).getCantToken();
 
+                if (token instanceof Advantageous){
+                    if (((Advantageous)token).getTurns() == 3){
+                        moveToken(cantTokens, token.getBox() + 3);
+                        ((Advantageous)token).resetTurns();
+                    }
+                } else if (token instanceof Engineer){
+                    board.getBox(token.getBox()).setColor(Color.black);
+                    board.getBox(newBox).setColor(Color.gray);
+                }
+
                 moveToken(cantTokens, newBox);
             }
         }
-        changeTurn(dices[0].getValue(), dices[1].getValue());
+        changeTurn();
     }
 
     private void outOfHome(int cantTokens){
@@ -128,10 +141,10 @@ public class Parchis {
         }
     }
 
-    private void changeTurn(int valueOne, int valueTwo){
-        if (currentPlayer == 0 && valueOne != valueTwo){
+    private void changeTurn(){
+        if (currentPlayer == 0 && dices[0].getValue()!= dices[1].getValue()){
             currentPlayer = 1;
-        } else if (currentPlayer == 1 && valueOne != valueTwo){
+        } else if (currentPlayer == 1 && dices[0].getValue()!= dices[1].getValue()){
             currentPlayer = 0;
         }
     }
